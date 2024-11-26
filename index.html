@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Secure Invite System</h1>
+
+      <h2>Step 1: Generate Keypair</h2>
+      <button id="generate-keys">Generate Keys</button>
+      <p>Your Public Key: <span id="public-key">N/A</span></p>
+
+      <h2>Step 2: Exchange Public Keys</h2>
+      <textarea
+        id="other-public-key"
+        placeholder="Enter Other User's Public Key"
+      ></textarea>
+      <button id="compute-secret">Compute Shared Secret</button>
+      <p>Shared Secret: <span id="shared-secret">N/A</span></p>
+
+      <h2>Step 3: Send/Receive Encrypted Invite</h2>
+      <textarea id="invite" placeholder="Enter Room Invite"></textarea>
+      <button id="encrypt-invite">Encrypt Invite</button>
+      <p>Encrypted Invite: <span id="encrypted-invite">N/A</span></p>
+
+      <textarea
+        id="received-encrypted-invite"
+        placeholder="Enter Received Encrypted Invite"
+      ></textarea>
+      <button id="decrypt-invite">Decrypt Invite</button>
+      <p>Decrypted Invite: <span id="decrypted-invite">N/A</span></p>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
