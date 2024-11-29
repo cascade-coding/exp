@@ -1,4 +1,5 @@
 import _sodium from "libsodium-wrappers";
+import { encryptAndUploadFileInChunks } from "./up1";
 
 // Assuming you have the Base64 encoded encrypted file and nonce from the server
 let encryptedFileBase64 = "";
@@ -87,7 +88,8 @@ async function uploadEncryptedFile(encryptedFileBase64, nonceBase64) {
 
 const uploadBtn = document.getElementById("uploadBtn");
 
-uploadBtn.addEventListener("click", () => encryptAndUploadFile());
+// uploadBtn.addEventListener("click", () => encryptAndUploadFile());
+uploadBtn.addEventListener("click", () => encryptAndUploadFileInChunks());
 
 // Function to decrypt the file after retrieval from the server
 

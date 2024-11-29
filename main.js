@@ -11,7 +11,28 @@ import _sodium from "libsodium-wrappers";
   // 1. Generate Keypair
   document.getElementById("generate-keys").addEventListener("click", () => {
     myKeypair = sodium.crypto_box_keypair();
+
     const publicKeyBase64 = sodium.to_base64(myKeypair.publicKey);
+
+    const name = "Donald J Trump";
+
+    const nameBase64 = sodium.to_base64(sodium.from_string(name));
+
+    const shareInfo = `${publicKeyBase64}.${nameBase64}`;
+
+    console.log(shareInfo);
+
+    const sharedNameBase64 = shareInfo.split(".")[1];
+
+    console.log(sharedNameBase64);
+
+    console.log(nameBase64);
+
+    // Convert back from base64 to the original object
+    const deserializedBytes = sodium.from_base64(sharedNameBase64);
+    const deserializedName = sodium.to_string(deserializedBytes);
+
+    console.log(deserializedName);
 
     document.getElementById("public-key").innerText = publicKeyBase64;
   });
@@ -30,6 +51,15 @@ import _sodium from "libsodium-wrappers";
       myKeypair.privateKey,
       otherPublicKey
     );
+
+    const randomString1 = sodium.crypto_generichash(32, sharedSecret); // 32-byte output for SHA-256
+    const randomString2 = sodium.crypto_generichash(32, randomString1);
+
+    const randomString1Base64 = sodium.to_base64(randomString1); // ! one to one room id
+    const randomString2Base64 = sodium.to_base64(randomString2); // ! message secret
+
+    console.log({ randomString1Base64 });
+    console.log({ randomString2Base64 });
 
     // ! for the websoket connection
     const sharedSecretBase64 = sodium.to_base64(sharedSecret);
