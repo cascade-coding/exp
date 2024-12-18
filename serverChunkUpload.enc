@@ -1,0 +1,94 @@
+// const fs = require("fs");
+// const path = require("path");
+
+// const uploadDir = "./uploads";
+// if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
+
+// app.post("/upload-chunk", (req, res) => {
+//   const { chunk, chunkIndex, totalChunks, salt, iv } = req.body;
+
+//   // Convert the chunk back to Uint8Array
+//   const chunkData = new Uint8Array(chunk);
+
+//   // Path to the temporary file
+//   const filePath = path.join(uploadDir, "encrypted-file.enc");
+
+//   // Append chunk to file
+//   fs.appendFile(filePath, Buffer.from(chunkData), (err) => {
+//     if (err) {
+//       console.error(`Failed to write chunk ${chunkIndex}`, err);
+//       return res.status(500).send("Chunk upload failed");
+//     }
+
+//     console.log(`Uploaded chunk ${chunkIndex + 1}/${totalChunks}`);
+
+//     // Check if all chunks are uploaded
+//     if (chunkIndex + 1 === totalChunks) {
+//       console.log("File upload complete:", filePath);
+
+//       // Save or process additional metadata (salt, iv) if necessary
+//     }
+
+//     res.send("Chunk uploaded successfully");
+//   });
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+// defmodule MyAppWeb.UploadController do
+//   use MyAppWeb, :controller
+
+//   def upload_chunk(conn, %{
+//         "chunk" => chunk,
+//         "chunkIndex" => chunk_index,
+//         "totalChunks" => total_chunks,
+//         "salt" => salt,
+//         "iv" => iv
+//       }) do
+//     upload_dir = Path.expand("./uploads")
+//     File.mkdir_p!(upload_dir)
+
+//     file_path = Path.join(upload_dir, "encrypted-file.enc")
+
+//     # Write the chunk to the file
+//     case File.write(file_path, chunk, [:append]) do
+//       :ok ->
+//         IO.puts("Uploaded chunk #{chunk_index + 1}/#{total_chunks}")
+
+//         # Check if the upload is complete
+//         if chunk_index + 1 == total_chunks do
+//           IO.puts("File upload complete: #{file_path}")
+
+//           # Optionally, handle metadata like salt and iv
+//           save_metadata(file_path, salt, iv)
+//         end
+
+//         send_resp(conn, 200, "Chunk uploaded successfully")
+
+//       {:error, reason} ->
+//         IO.inspect(reason, label: "Failed to write chunk")
+//         send_resp(conn, 500, "Chunk upload failed")
+//     end
+//   end
+
+//   defp save_metadata(file_path, salt, iv) do
+//     metadata_path = file_path <> ".metadata"
+
+//     metadata = %{
+//       salt: salt,
+//       iv: iv
+//     }
+
+//     File.write!(metadata_path, Jason.encode!(metadata))
+//   end
+// end
